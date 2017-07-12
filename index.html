@@ -30,10 +30,11 @@
 		
 		var fx = -window.vx;
 		var fy = -window.vy;
-		if (window.mx)
-			fx += 25 / (window.x + 20 - window.mx);
-		if (window.my)
-			fy += 25 / (window.y + 20 - window.my);
+		if (window.mx && window.my) {
+			var r2 = (window.x + 20 - window.mx) * (window.x + 20 - window.mx) + (window.y + 20 - window.my) * (window.y + 20 - window.my);
+			fx += 250 * (window.x + 20 - window.mx) / r2;
+			fy += 250 * (window.y + 20 - window.my) / r2;
+		}
 			
 		if (!isNumber(fx)) fx = 0;
 		if (!isNumber(fy)) fy = 0;
