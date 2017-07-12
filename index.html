@@ -1,0 +1,92 @@
+<html>
+<head>
+	<title>Close This!</title>
+	<style type="text/css">
+	#main {
+		width: 601px;
+		height: 481px;
+		padding: 0;
+		margin: 0;
+		background-image: url('bg.png');
+		position: fixed;
+	}
+	
+	#button {
+		width: 40px;
+		height: 40px;
+		background-image: url('close.png');
+		padding: 0;
+		margin: 0;
+		position: absolute;
+		left: 536px;
+		top: 25px;
+		cursor: pointer;
+	}
+	</style>
+	<script type="text/javascript">
+	function doPhysics() {
+		var time = new Date().getTime();
+		var dt = time - window.t;
+		
+		var fx = -window.vx;
+		var fy = -window.vy;
+		if (window.mx)
+			fx += 25 / (window.x + 20 - window.mx);
+		if (window.my)
+			fy += 25 / (window.y + 20 - window.my);
+		
+		window.vx += fx * dt / 1000.0;
+		window.vy += fy * dt / 1000.0;
+		window.x += window.vx * dt;
+		window.y += window.vy * dt;
+		
+		if (window.x < 0) {
+			window.vx *= -1;
+			window.x = 0;
+		}
+		if (window.y < 0) {
+			window.vy *= -1;
+			window.y = 0;
+		}
+		if (window.x > 561) {
+			window.vx *= -1;
+			window.x = 561;
+		}
+		if (window.y > 441) {
+			window.vy *= -1;
+			window.y = 441;
+		}
+		
+		document.getElementById("button").style.left = Math.round(window.x) + "px";
+		document.getElementById("button").style.top = Math.round(window.y) + "px";
+		window.t = time;
+	}
+	
+	function mouseMove(evt) {
+		window.mx = event.clientX;
+		window.my = event.clientY;
+		console.log(window.mx + "/" + window.my)
+	}
+	
+	function bamboozle() {
+		window.vx = 50;
+		window.vy = 50;
+	}
+	</script>
+</head>
+<body>
+	<div id="main">
+		<div id="button" />
+	</div>
+	<script type="text/javascript">
+		window.t = new Date().getTime();
+		window.x = 540;
+		window.y = 25;
+		window.vx = 0;
+		window.vy = 0;
+		
+		document.onmousemove = mouseMove;
+		document.getElementById("button").onclick = bamboozle;
+		window.setInterval(doPhysics, 20);
+	</script>
+</body>
