@@ -34,6 +34,9 @@
 			fx += 25 / (window.x + 20 - window.mx);
 		if (window.my)
 			fy += 25 / (window.y + 20 - window.my);
+			
+		if (!isNumber(fx)) fx = 0;
+		if (!isNumber(fy)) fy = 0;
 		
 		window.vx += fx * dt / 1000.0;
 		window.vy += fy * dt / 1000.0;
@@ -71,6 +74,10 @@
 		window.vx = 50;
 		window.vy = 50;
 	}
+	
+	function isNumber(n) {
+		return !isNaN(n) && isFinite(n);
+	}
 	</script>
 </head>
 <body>
@@ -89,3 +96,4 @@
 		window.setInterval(doPhysics, 20);
 	</script>
 </body>
+</html>
