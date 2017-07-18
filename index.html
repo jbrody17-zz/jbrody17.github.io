@@ -33,7 +33,7 @@
 		if (window.mx && window.my) {
 			var r2 = (window.x + 20 - window.mx) * (window.x + 20 - window.mx) + (window.y + 20 - window.my) * (window.y + 20 - window.my);
 			fx += 250 * (window.x + 20 - window.mx) / r2;
-			fy += 250 * (window.y + 20 - window.my) / r2;
+			fy += (250 * (window.y + 20 - window.my) / r2) - 9.8;
 		}
 			
 		if (!isNumber(fx)) fx = 0;
